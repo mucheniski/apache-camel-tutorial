@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 // https://github.com/in28minutes/camel
 
-@Component
+// @Component
 public class MyFileRouter extends RouteBuilder {
 
     @Override
