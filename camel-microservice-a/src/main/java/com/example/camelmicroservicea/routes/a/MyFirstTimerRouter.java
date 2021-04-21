@@ -2,6 +2,7 @@ package com.example.camelmicroservicea.routes.a;
 
 import com.example.camelmicroservicea.beans.GetCurrentTimeBean;
 import com.example.camelmicroservicea.beans.SimpleLogginProcessingComponent;
+import com.example.camelmicroservicea.utils.SimpleLogginProcessor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,10 +30,11 @@ public class MyFirstTimerRouter extends RouteBuilder {
                 .log("${body}")
                 .transform().constant("My Constant Message") // show in console Exchange[ExchangePattern: InOnly, BodyType: String, Body: My Constant Message]
                 .log("${body}")
-                .bean(getCurrentTimeBean, "getCurrentTime")
+                .bean(getCurrentTimeBean, "getCurrentTime") // Trasnform
                 .log("${body}")
-                .bean(simpleLogginProcessingComponent, "process")
+                .bean(simpleLogginProcessingComponent, "process") // Processing
                 .log("${body}")
+                .process(new SimpleLogginProcessor())
                 .to("log:first-timer"); // in this case is te database
 
     }
